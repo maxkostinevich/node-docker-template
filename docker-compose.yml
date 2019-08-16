@@ -1,0 +1,65 @@
+version: "3"
+        
+services:  
+    # node
+    node:
+        container_name: ${PROJECT_NAME}_node
+        build: 
+            context: ./
+            dockerfile: ./docker-assets/node/Dockerfile
+        environment:
+            - NODE_ENV=development
+        volumes:
+            - ./src:/src
+            - /src/node_modules
+        links:
+            - mongo
+            - redis
+            - mailhog
+        ports:
+            - 8080:8080
+        expose:
+            - "8080"
+        working_dir: /src
+        command: >
+            sh -c "npm run watch"
+            
+    
+    # mongo
+    mongo:
+        container_name: ${PROJECT_NAME}_mongo
+        image: mongo
+        restart: always
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+            - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+
+    # mongo express
+    mongo-express:
+        container_name: ${PROJECT_NAME}_mongo_express
+        image: mongo-express
+        restart: always
+        links:
+            - mongo
+        ports:
+            - 8081:8081
+        environment:
+            - ME_CONFIG_MONGODB_ADMINUSERNAME=${DB_USER}
+            - ME_CONFIG_MONGODB_ADMINPASSWORD=${DB_PASSWORD}
+            
+    # redis
+    redis:
+        container_name: ${PROJECT_NAME}_redis
+        image: redis:alpine
+        
+            
+    # mailhog       
+    mailhog:
+        container_name: ${PROJECT_NAME}_mailhog
+        image: mailhog/mailhog
+        ports: 
+            - 1025:1025
+            - 8085:8025
+            
+    
+
