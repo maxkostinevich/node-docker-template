@@ -20,7 +20,7 @@ Linux, OS X and Windows friendly.
 1. Clone this repo:
 
 ```
-git clone ggit@github.com:maxkostinevich/node-docker-template.git yourproject
+git clone git@github.com:maxkostinevich/node-docker-template.git yourproject
 cd yourproject
 rm -rf .git
 ```
