@@ -9,22 +9,24 @@ services:
             dockerfile: ./docker-assets/node/Dockerfile
         environment:
             - NODE_ENV=development
+            - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
         volumes:
             - ./src:/src
-            - /src/node_modules
         links:
             - mongo
             - redis
             - mailhog
         ports:
+            - 3000:3000
+            - 3001:3001
+            - 5000:5000
             - 8080:8080
         expose:
-            - "8080"
+            - "3000"
+            - "3001"
         working_dir: /src
-        command: >
-            sh -c "npm run watch"
-            
-    
+        
     # mongo
     mongo:
         container_name: ${PROJECT_NAME}_mongo
@@ -61,5 +63,8 @@ services:
             - 1025:1025
             - 8085:8025
             
+            
+    
+
     
 

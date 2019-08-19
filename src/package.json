@@ -6,12 +6,12 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-	"watch": "nodemon server.js --legacy-watch --ignore public/"
+    "watch": "nodemon server.js --legacy-watch --ignore public/"
   },
   "dependencies": {
     "express": "^4.16.1"
   },
   "devDependencies": {
-	"nodemon": "^1.19.1"
+    "nodemon": "^1.19.1"
   }
 }

@@ -1,13 +1,20 @@
 # Set the base image.
-FROM node:10
+FROM alpine:3.10
 
-RUN mkdir /src
+RUN apk add --no-cache \
+  python \
+  py-pip \
+  py-setuptools \
+  ca-certificates \
+  groff \
+  less \
+  bash && \
+  pip install --no-cache-dir --upgrade pip awscli
+  
+RUN apk add --update nodejs npm
 
-COPY ./src/package*.json /src
+RUN npm install -g serverless
+RUN npm install -g nodemon
 
-WORKDIR /src
-
-RUN npm install
-
-#COPY ./src .
+CMD tail -f /dev/null
 

@@ -7,6 +7,7 @@ Linux, OS X and Windows friendly.
 
 ## Included services
 - Node.js
+- Serverless Framework
 - Mongo
 - Mongo Express (Mongo UI)
 - Redis
@@ -45,6 +46,21 @@ node.bat
 
 ```
 sh node.sh
+```
+
+### Run Project
+
+```
+npm install
+
+npm run watch
+```
+
+### Serverless Example
+
+Run serverless offline:
+```
+sls offline --host=0.0.0.0 --port=8080
 ```
 
 
